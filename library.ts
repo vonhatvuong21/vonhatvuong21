@@ -6,6 +6,10 @@ export default class library {
         const book = new Book (name, author);
         this.books.push(book);
     }
+
+    findBookByName(name: string): Book | undefined {
+        return this.books.find(book => book.title.toLocaleLowerCase() === name.toLocaleLowerCase());
+    }
     
     editAuthor(name: string, newAuthor: string): void {
         const book = this.books.find(book => book.title === name);
@@ -15,7 +19,7 @@ export default class library {
             console.log(`Book with title "${name}" not found.`);
         }
     }
-    
+
     listBooks(): void {
         this.books.forEach((book) => {
             console.log(book.getDetails());
@@ -28,4 +32,4 @@ export default class library {
     deleteBookByAuthor(author: string): void {
         this.books = this.books.filter(book => book.author !== author);
     }
-} 
+        }
