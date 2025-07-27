@@ -1,19 +1,31 @@
 import Book from "./book";
 export default class library {
     private books: Book[] = []
-    addBook(book: Book): void {
+
+    createBook(name: string, author: string): void {
+        const book = new Book (name, author);
         this.books.push(book);
     }
-
-    ShowAllBooks(): void {
-        this.books.forEach ((book) => {
-            console.log(`Show all books: "${book.title}" by "${book.author}"`);
-        })
-    }
-    findBookByTitle(title: string): Book | undefined {
-        return this.books.find((book) => book.title.toLowerCase() === title.toLowerCase());
-
-    }
-
     
+    editAuthor(name: string, newAuthor: string): void {
+        const book = this.books.find(book => book.title === name);
+        if (book) {
+            book.author = newAuthor
+        } else {
+            console.log(`Book with title "${name}" not found.`);
+        }
+    }
+    
+    listBooks(): void {
+        this.books.forEach((book) => {
+            console.log(book.getDetails());
+        });
+    }
+
+    deleteBookByName(name: string): void {
+        this.books = this.books.filter(book => book.title !== name);
+    }
+    deleteBookByAuthor(author: string): void {
+        this.books = this.books.filter(book => book.author !== author);
+    }
 } 
